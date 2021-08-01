@@ -25,11 +25,21 @@ Please contact customer service.\n')
     return pin, False
 #//////////////////////////////////////////////////
 def withdraw(current_balance):
-    withdrawl_amount = int(input('Enter amount to withdraw: '))
+    withdrawal_amount = int(input('Enter amount to withdraw: '))
     '''add a check that input is valid'''
 
-    current_balance = current_balance - withdrawl_amount
-    print('Remaining balance: ${}'.format(current_balance))
+
+    if current_balance - withdrawal_amount > 0:
+        current_balance = current_balance - withdrawal_amount
+        print('Remaining balance: ${}'.format(current_balance))
+    elif current_balance - withdrawal_amount < 0:
+        print(f'Insufficient funds. Your balance is: ${current_balance}\n')
+    elif current_balance - withdrawal_amount == 0:
+        print(f'\nWithdrawing ${withdrawal_amount} will bring your balance to $0.')
+        print(f'If your balance reaches $0, your account will be closed.')
+        user_input = input('Would you like to proceed? Type yes or no.\n')
+        if user_input == 'yes':
+            current_balance = current_balance - withdrawal_amount
     return current_balance
 #/////////////////////////////////////////////////
 def check_balance(current_balance):
